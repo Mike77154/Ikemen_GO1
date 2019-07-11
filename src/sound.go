@@ -15,6 +15,7 @@ import (
 	"github.com/faiface/beep/mp3"
 	"github.com/faiface/beep/speaker"
 	"github.com/faiface/beep/vorbis"
+	"github.com/sqweek/fluidsynth"
 )
 
 const (
@@ -256,6 +257,10 @@ func (bgm *Bgm) IsFLAC() bool {
 	return bgm.IsFormat(".flac")
 }
 
+func (bgm *Bgm) IsMIDI() bool {
+	return bgm.IsFormat(".mid")
+}
+
 func (bgm *Bgm) IsFormat(extension string) bool {
 	return filepath.Ext(bgm.filename) == extension
 }
@@ -275,6 +280,8 @@ func (bgm *Bgm) Open(filename string) {
 		bgm.ReadMp3()
 	} else if bgm.IsFLAC() {
 		bgm.ReadFLAC()
+	} else if bgm.IsMIDI() {
+		bgm.ReadMIDI()
 	}
 
 }
@@ -300,6 +307,15 @@ func (bgm *Bgm) ReadFLAC() {
 func (bgm *Bgm) ReadVorbis() {
 	f, _ := os.Open(bgm.filename)
 	s, format, err := vorbis.Decode(f)
+	if err != nil {
+		return
+	}
+	bgm.ReadFormat(s, format)
+}
+
+func (bgm *Bgm) ReadMIDI() {
+	f, _ := os.Open(bgm.filename)
+	s, format, err := C.new_fluid_synth(f)
 	if err != nil {
 		return
 	}
