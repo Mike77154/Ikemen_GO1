@@ -47,6 +47,7 @@ function main.f_setCommand(c)
 	commandAdd(c, 'holds', '/s')
 	commandAdd(c, 'su', '/s, U')
 	commandAdd(c, 'sd', '/s, D')
+	commandAdd(c, '¿', '¿')
 end
 
 main.p1Cmd = commandNew()
@@ -75,8 +76,9 @@ function main.f_btnPalNo(cmd)
 	return 0
 end
 
+function 
 --animDraw at specified coordinates
-function main.f_animPosDraw(a, x, y)
+    main.f_animPosDraw(a, x, y)
 	animSetPos(a, x, y)
 	animUpdate(a)
 	animDraw(a)
@@ -1580,6 +1582,16 @@ function main.f_mainMenu()
 	if motif.files.intro_storyboard ~= '' then
 		storyboard.f_storyboard(motif.files.intro_storyboard)
 	end
+	eb
+	
+	if 
+	main.f_setCommand (c '¿') then
+	sndPlay(motif.files.snd_data, motif.title_info.cursor_done_snd[1], motif.title_info.cursor_done_snd[2]) 
+	main.credits = config.Credits + 1
+	 end
+	end
+
+	if 
 	main.f_resetBG(motif.title_info, motif.titlebgdef, motif.music.title_bgm)
 	while true do
 		cursorPosY, moveTxt, item = main.f_menuCommon1(cursorPosY, moveTxt, item, t)
@@ -1589,7 +1601,8 @@ function main.f_mainMenu()
 			main.SetDefaultScale()
 			main.f_warning(main.f_extractText(motif.infobox.text), motif.title_info, motif.titlebgdef, motif.infobox, txt_infoboxTitle, main.infoBox)
 			main.SetScaleValues()
-		elseif main.f_btnPalNo(main.p1Cmd) > 0 then
+		elseif main.f_btnPalNo(main.p1Cmd) > 0 or 
+		main.f_btnPalNo(main.p2Cmd) > 0 then
 			main.f_default()
 			--ARCADE
 			if t[item].itemname == 'arcade' then
