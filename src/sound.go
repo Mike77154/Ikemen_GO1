@@ -17,6 +17,10 @@ import (
 	"github.com/faiface/beep/speaker"
 	"github.com/faiface/beep/vorbis"
 	"github.com/faiface/beep/wav"
+	"github.com/sqweek/fluidsynth"
+	"github.com/naivesound/tsf"
+	"github.com/Wohlstand/libOPNMIDI"
+	
 )
 
 const (
@@ -233,6 +237,40 @@ func (n *NormalizerLR) process(bai float64, sam *float32) float64 {
 	*sam = float32(s)
 	return bai
 }
+
+// ------------------------------------------------------------------
+      
+//////////////////MIDI ENGINES/////////////////////////////////////
+
+// ------------------------------------------------------------------
+         //Soundfont Engines// I dont have any idea of how to do this, please help me
+// ------------------------------------------------------------------
+
+
+// ------------------------------------------------------------------
+//fluidsynth (implementing W.I.P)
+
+   //settings := fluidsynth.NewSettings()
+    //settings.setNum("synth.sample-rate", float64(audioFrequency)) // this should match your openAL config
+    // customise more settings here if you like; see "FluidSettings" in the documentation for a full list
+   // synth := fluidsynth.NewSynth(settings)
+   // soundfontId := synth.SFLoad(soundfontPath, true)
+// ------------------------------------------------------------------
+//Tinysoundfont (implementing W.I.P)
+
+     //settings := tsf_load_memory ()
+     //settings.setNum :=  tsf_set_output ()
+    // customise more settings here if you like; see "FluidSettings" in the documentation for a full list
+   //soundfontId := tsf_load_filename(soundfontPath, true)
+// ------------------------------------------------------------------
+//LibOPNMIDI
+
+//OPNMIDI_ChipType_OPN2
+//OPNMIDI_VolumeModel_AUTO = 1
+//OPNMIDI_SampleType_S16 = 1
+//OPN2_MIDIPlayer
+//OPNMIDI_EMU_GENS
+// ------------------------------------------------------------------
 
 // ------------------------------------------------------------------
 // Bgm
